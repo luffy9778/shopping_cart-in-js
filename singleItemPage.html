@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
+    "
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+        <div class="container-fluid">
+          <a class="navbar-brand mx-md-5" href="#">Shopping Cart</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item mx-md-5">
+                <a class="nav-link active" aria-current="page" href="./home.html">Home</a>
+              </li>
+              <li class="nav-item me-md-5">
+                <a class="nav-link fs-5" href="/cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+              </li>
+              
+            </ul>
+            <!-- <form class="d-flex me-md-5" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              
+            </form> -->
+          </div>
+        </div>
+      </nav>
+    <section class="container mt-5" id="singleItemSection">
+        <!-- <div class="card mb-3 mx-auto border-0 bg-light" style="max-width: 940px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="data:image/jpeg;base64,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" class="img-fluid rounded-start h-100" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius excepturi deserunt sint sunt at ipsam cumque dolor ullam totam enim, laboriosam accusamus voluptatibus adipisci corrupti pariatur quae illo iste perspiciatis.
+                  Repellat in dolor aperiam nostrum nulla facere eligendi vel impedit? Molestias similique optio excepturi non, vel harum? Amet rerum neque aut velit vel ratione officiis corrupti. Velit tempora asperiores non.
+                  Excepturi, perspiciatis neque accusamus blanditiis illum iusto ab, quasi necessitatibus id ut distinctio. At aspernatur eum tenetur, commodi numquam amet odit consequuntur atque, sed ut illo ex expedita, eos veniam.
+                  Numquam ipsa at, molestias non saepe odit quas fuga itaque tenetur quia ipsam reprehenderit assumenda nam, quae veniam ratione consequatur dolores eum fugit libero! Nostrum a asperiores quibusdam unde repellat? This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <button class="btn btn-primary">Add To Cart</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./Data.js"></script>
+    <script src="./singleItemPage.js"></script>
+</body>
+</html>
