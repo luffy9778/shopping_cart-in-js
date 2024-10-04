@@ -3,6 +3,17 @@ const urlParams=new URLSearchParams(window.location.search)
 const itemId=urlParams.get("id")
 const singleItemSection=document.getElementById("singleItemSection")
 const item= data.find((i)=>i.id==itemId)
+const alertComponent=document.getElementById("alert")
+
+
+const getCart=()=>{
+  // cart=JSON.parse(localStorage.getItem("cart"))
+  if(cart.length){
+    let len=cart.reduce((a,b)=>a+(b.quantity||1),0)
+    document.getElementById("cartIcon").innerHTML=`<span class='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger'>${len==0?"":len}</span>`
+  }
+}
+getCart()
 singleItemSection.innerHTML=(`<div class="card mb-3 mx-auto border-0 bg-light" style="max-width: 940px;">
             <div class="row g-0">
               <div class="col-md-4">
@@ -11,8 +22,8 @@ singleItemSection.innerHTML=(`<div class="card mb-3 mx-auto border-0 bg-light" s
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">${item.name}</h5>
-                  <p class="card-text">${item.discription}</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <p class="card-text">${item.description}</p>
+                  <p class="card-text">₹${item.prize}</p>
                   <button class="btn btn-primary" onclick=addToCart(${item.id})>Add To Cart</button>
                 </div>
               </div>
@@ -24,10 +35,20 @@ const  addToCart = (i) =>{
     if(!checkCart){
     const b=data.find(a=>a.id==i)
     cart.push(b)
-    alert("item add to cart")
+    alertComponent.innerHTML="<i class='fa-solid fa-circle-check px-2'></i>item add to cart "
+    alertComponent.classList.add("success")
+    setTimeout(() => {
+      alertComponent.classList.remove("success")
+    }, 1500);
     localStorage.setItem("cart",JSON.stringify(cart))
+    getCart()
     }
     else{
-    alert("item already in cart")
+      alertComponent.innerHTML="<i class='fa-solid fa-circle-exclamation px-2'></i>item already in cart"
+      alertComponent.classList.add("info")
+      setTimeout(() => {
+        alertComponent.classList.remove("info")
+      }, 1500);
     }
+    
 }

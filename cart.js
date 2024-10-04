@@ -1,10 +1,13 @@
 const  cartSection = document.getElementById("cartSection");
 const  decBtn = document.getElementById("decBtn");
+const input=document.getElementById("search")
+
 let cart
 const getCart=()=>{
   cart=JSON.parse(localStorage.getItem("cart"))||[] 
 }
 const totalAmount=()=>{
+  const amountSection=document.getElementById("amount")
   if(cart.length){
     const tAmount=document.getElementById("tAmount")
   const total=cart.reduce((a,b)=>a+(b.prize*(b.quantity||1)),0)
@@ -12,15 +15,27 @@ const totalAmount=()=>{
     const element=document.createElement("h3")
     element.id="tAmount"
     element.innerText=`Total Amount:${total}`
-    cartSection.appendChild(element)
+    amountSection.appendChild(element)
   }
   else{
     tAmount.innerText=`Total Amount:${total}`
   }}
+  else{
+    amountSection.innerHTML=""
+    }
 }
+
+let search=[]
+input.addEventListener("input",()=>{
+   search=cart.filter(i=>input.value.toLowerCase()==i.name.toLowerCase())
+   generateCartItems()
+})
+
 const generateCartItems=()=>{
   getCart()
-  cartSection.innerHTML=!cart.length?"<p>Cart is Empty...</p><a href='./home.html'>go to home</a>":cart.map(i=>`<div
+  let items=search.length?search:cart  
+    totalAmount()
+  cartSection.innerHTML=!cart.length?"<div class='d-flex justify-content-center align-items-center w-100 vh-100 '><p><h3>Cart is Empty...</h3><a href='./home.html'>go to home</a></p></div>":items.map(i=>`<div
           class="card mb-3 mx-auto my-5 bg-light border-0"
           style="max-width: 740px"
         >
@@ -36,10 +51,10 @@ const generateCartItems=()=>{
               <div class="card-body">               
                 <h5 class="card-title">${i.name}</h5>
                 <p class="card-text">
-                ${i.discription.lenth<15?i.discription.length:(`${i.discription.slice(0,20)}...`)}
+                ${i.description.length<15?i.description:(`${i.description.slice(0,20)}...`)}
                 </p>
                 <p class="card-text">
-                  $${i.prize}
+                  ₹${i.prize}
                 </p>
                 <div>
                   <button class="btn btn-light" id="decBtn" onclick="decrement(${i.id})">-</button><span id="counter${i.id}">${i.quantity?i.quantity:"1"}</span
@@ -52,9 +67,7 @@ const generateCartItems=()=>{
             </div>
           </div>
         </div>`)
-        .join('')
-        totalAmount()
-        
+        .join('')     
 }
 generateCartItems()
 
